@@ -37,7 +37,7 @@ export default function GuestRoomPostDetail() {
                 <Descriptions column={1}>
                     <Descriptions.Item label="Khách sạn">{post.khachSan?.tenKhachSan || post.khachSanId?.tenKhachSan}</Descriptions.Item>
                     <Descriptions.Item label="Loại phòng">{post.loaiPhong?.tenLoaiPhong || post.loaiPhongId?.tenLoaiPhong}</Descriptions.Item>
-                    <Descriptions.Item label="Giá">{post.gia?.toLocaleString() || "—"} VNĐ</Descriptions.Item>
+                    <Descriptions.Item label="Giá">{post.loaiPhong.gia?.toLocaleString() || "—"} VNĐ</Descriptions.Item>
                     <Descriptions.Item label="Trạng thái"><Tag color={post.trangThaiBaiDang === "DA_DUYET" ? "green" : "orange"}>{RoomPostStatusMap[post.trangThaiBaiDang] || post.trangThaiBaiDang}</Tag></Descriptions.Item>
                     {post.moTa && <Descriptions.Item label="Mô tả">{post.moTa}</Descriptions.Item>}
                 </Descriptions>

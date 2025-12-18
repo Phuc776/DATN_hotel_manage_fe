@@ -12,18 +12,16 @@ export default function StaffRoomDetail() {
     const statusLabel = {
         TRONG: "Trống",
         DA_DAT: "Đã đặt",
-        CHUA_DEN: "Chưa đến",
+        
         CO_KHACH: "Có khách",
-        CHUA_DI: "Chưa đi",
-        DA_TRA: "Đã trả",
+    
     };
     const statusColor = {
         TRONG: "green",
         DA_DAT: "orange",
-        CHUA_DEN: "blue",
+        
         CO_KHACH: "red",
-        CHUA_DI: "purple",
-        DA_TRA: "gray",
+        
     };
 
     useEffect(() => {
@@ -46,8 +44,7 @@ export default function StaffRoomDetail() {
                 <Descriptions column={1}>
                     <Descriptions.Item label="Số phòng">{room.soPhong}</Descriptions.Item>
                     <Descriptions.Item label="Trạng thái"><Tag color={statusColor[room.trangThaiPhong]}>{statusLabel[room.trangThaiPhong]}</Tag></Descriptions.Item>
-                    <Descriptions.Item label="Loại phòng">{room.loaiPhongId?.tenLoaiPhong}</Descriptions.Item>
-                    <Descriptions.Item label="Khách sạn">{room.khachSanId?.tenKhachSan}</Descriptions.Item>
+                    <Descriptions.Item label="Loại phòng">{room.loaiPhong.tenLoaiPhong}</Descriptions.Item>
                 </Descriptions>
             </Card>
         </div>

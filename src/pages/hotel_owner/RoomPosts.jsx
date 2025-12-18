@@ -27,7 +27,7 @@ export default function RoomPosts() {
 
     const fetchHotels = async () => {
         try {
-            const res = await api.get("/chu-khach-san/khach-san");
+            const res = await api.get("/chu-khach-san/khach-san/active");
             setHotels(res.data.data || []);
         } catch (e) {
             // ignore

@@ -2,11 +2,14 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import api from "../../api/axios"
 import { Row, Col, Card, Spin, Tag, Button, Empty } from "antd"
+import SearchAvailable from "../user/SearchAvailable"
 
 export default function Home() {
   const [hotels, setHotels] = useState([])
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [showSearch, setShowSearch] = useState(false);
+
 
   const RoomPostStatusMap = {
     CHO_DUYET: "Chờ duyệt",
@@ -54,6 +57,32 @@ export default function Home() {
         </div>
       </section>
 
+      <Button
+        type="primary"
+        size="large"
+        onClick={() => setShowSearch(true)}
+      >
+        Đặt phòng / Tìm phòng
+      </Button>
+
+      {showSearch && (
+        <section className="bg-white p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-4">
+            Tìm phòng trống
+          </h2>
+
+          <SearchAvailable
+            onSelect={(data) => {
+              navigate(`/search/${data.baiDangPhongId}`, {
+                state: data
+              });
+            }}
+          />
+        </section>
+      )}
+
+
+
       <section className="bg-gray-50 p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Khách sạn hiện tại</h2>
         {hotels.length === 0 ? (
@@ -95,7 +124,7 @@ export default function Home() {
                   <div className="h-40 bg-gray-200 mb-4 rounded" />
                   <h3 className="text-lg font-semibold">{p.tieuDe || `Bài đăng ${p.id}`}</h3>
                   <p className="text-gray-600 text-sm mb-1">Khách sạn: {p.khachSan?.tenKhachSan || p.khachSanId?.tenKhachSan}</p>
-                  <p className="text-gray-600 text-sm mb-2">Giá: {p.gia?.toLocaleString() || "—"} VNĐ</p>
+                  <p className="text-gray-600 text-sm mb-2">Giá: {p.loaiPhong.gia?.toLocaleString() || "—"} VNĐ</p>
                   <div className="flex items-center justify-between">
                     <Tag color={p.trangThaiBaiDang === "DA_DUYET" ? "green" : "orange"}>{RoomPostStatusMap[p.trangThaiBaiDang]}</Tag>
                     <Button type="link">

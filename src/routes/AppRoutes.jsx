@@ -12,8 +12,13 @@ import UserLayout from "../layouts/UserLayout"
 // pages
 import GuestHotelDetail from "../pages/guest/HotelDetail"
 import GuestRoomPostDetail from "../pages/guest/RoomPostDetail"
+import SearchAvailable from "../pages/user/SearchAvailable"
+import CustomerBookingForm from "../pages/user/CustomerBookingForm"
+
 import Login from "../pages/auth/Login"
 import Register from "../pages/auth/Register"
+
+// Admin pages
 import AdminDashboard from "../pages/admin/Dashboard"
 import AdminUsers from "../pages/admin/Users"
 import AdminUserDetail from "../pages/admin/UserDetail"
@@ -23,7 +28,10 @@ import AdminHotelDetail from "../pages/admin/HotelDetail"
 import AdminRoomPosts from "../pages/admin/RoomPosts"
 import AdminRoomPostDetail from "../pages/admin/RoomPostDetail"
 import AdminNotification from "../pages/admin/Notification"
+
 import Home from "../pages/guest/Home"
+
+// Owner pages
 import OwnerDashboard from "../pages/hotel_owner/Dashboard"
 import OwnerStaff from "../pages/hotel_owner/Staff"
 import StaffDetail from "../pages/hotel_owner/StaffDetail"
@@ -33,15 +41,24 @@ import RoomPosts from "../pages/hotel_owner/RoomPosts"
 import RoomPostDetail from "../pages/hotel_owner/RoomPostDetail"
 import OwnerRooms from "../pages/hotel_owner/Rooms"
 import OwnerRoomDetail from "../pages/hotel_owner/RoomDetail"
-import StaffRooms from "../pages/staff/Rooms"
-import StaffRoomDetail from "../pages/staff/RoomDetail"
 import OwnerNotification from "../pages/hotel_owner/Notification"
 import Roomtypes from "../pages/hotel_owner/Roomtypes"
 import RoomtypeDetail from "../pages/hotel_owner/RoomtypeDetail"
 import Services from "../pages/hotel_owner/Services"
 import ServiceDetail from "../pages/hotel_owner/ServiceDetail"
+
+// Staff pages
 import StaffDashboard from "../pages/staff/Dashboard"
+import StaffBookings from "../pages/staff/Bookings"
+import StaffRooms from "../pages/staff/Rooms"
+import StaffRoomDetail from "../pages/staff/RoomDetail"
+import StaffServices from "../pages/staff/Services"
+
+// User pages
 import UserDashboard from "../pages/user/Dashboard"
+import MyBookings from "../pages/user/MyBookings"
+import BookingDetail from "../pages/user/BookingDetail"
+import CustomerProfile from "../pages/user/CustomerProfile"
 
 function Unauthorized() {
   return (
@@ -68,6 +85,9 @@ export default function AppRoutes() {
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/hotels/:id" element={<GuestHotelDetail />} />
         <Route path="/room-posts/:id" element={<GuestRoomPostDetail />} />
+        <Route path="/search" element={<SearchAvailable />} />
+        <Route path="/search/:baiDangPhongId" element={<CustomerBookingForm />} />
+
       </Route>
 
       {/* ADMIN */}
@@ -136,33 +156,11 @@ export default function AppRoutes() {
         }
       >
         <Route index element={<StaffDashboard />} />
-        <Route
-          path="bookings"
-          element={
-            <div className="p-6">
-              <h1>Quản lý Đặt Phòng</h1>
-            </div>
-
-          }
-        />
-        <Route
-          path="check-in"
-          element={
-            <div className="p-6">
-              <h1>Check In/Out</h1>
-            </div>
-          }
-        />
+        <Route path="bookings" element={<StaffBookings />} />
         <Route path="rooms" element={<StaffRooms />} />
         <Route path="rooms/:id" element={<StaffRoomDetail />} />
-        <Route
-          path="services"
-          element={
-            <div className="p-6">
-              <h1>Dịch Vụ Thêm</h1>
-            </div>
-          }
-        />
+        <Route path="services" element={<StaffServices />} />
+
       </Route>
 
       {/* USER - KHACH_HANG */}
@@ -175,14 +173,8 @@ export default function AppRoutes() {
         }
       >
         <Route index element={<UserDashboard />} />
-        <Route
-          path="bookings"
-          element={
-            <div className="p-6">
-              <h1>Đặt Phòng Của Tôi</h1>
-            </div>
-          }
-        />
+        <Route path="bookings" element={<MyBookings />} />
+        <Route path="bookings/:id" element={<BookingDetail />} />
         <Route
           path="favorites"
           element={
@@ -193,11 +185,7 @@ export default function AppRoutes() {
         />
         <Route
           path="profile"
-          element={
-            <div className="p-6">
-              <h1>Hồ Sơ Cá Nhân</h1>
-            </div>
-          }
+          element={<CustomerProfile />}
         />
         <Route
           path="reviews"

@@ -22,7 +22,7 @@ export default function OwnerStaff() {
 
     const getHotelsList = async () => {
         try {
-            const res = await api.get("/chu-khach-san/khach-san");
+            const res = await api.get("/chu-khach-san/khach-san/active");
             setHotelsList(res.data.data || []);
         } catch (e) {
             // non-fatal
@@ -74,6 +74,7 @@ export default function OwnerStaff() {
             const body = {
                 hoTen: values.hoTen,
                 email: values.email,
+                matKhau: values.matKhau,
                 soDienThoai: values.soDienThoai,
                 chucVu: values.chucVu,
                 khachSanId: values.khachSanId,
@@ -94,8 +95,13 @@ export default function OwnerStaff() {
             render: (_, __, index) => index + 1,
         },
         {
-            title: "Chức vụ",
-            dataIndex: "chucVu",
+            title: "Nhân viên",
+            render: (_, record) => (
+                <div>
+                    <div className="font-semibold">{record.taiKhoan?.hoTen}</div>
+                    <div className="text-sm text-gray-500">{record.taiKhoan?.email}</div>
+                </div>
+            ),
         },
         {
             title: "Khách sạn",
@@ -107,21 +113,12 @@ export default function OwnerStaff() {
             ),
         },
         {
-            title: "Nhân viên",
-            render: (_, record) => (
-                <div>
-                    <div className="font-semibold">{record.taiKhoan?.hoTen}</div>
-                    <div className="text-sm text-gray-500">{record.taiKhoan?.email}</div>
-                </div>
-            ),
+            title: "Chức vụ",
+            dataIndex: "chucVu",
         },
         {
             title: "SĐT",
             render: (_, record) => record.taiKhoan?.soDienThoai,
-        },
-        {
-            title: "Vai trò",
-            render: (_, record) => RoleMap[record.taiKhoan?.vaiTro] || record.taiKhoan?.vaiTro,
         },
         {
             title: "Ngày tạo",
@@ -179,6 +176,9 @@ export default function OwnerStaff() {
                     </Form.Item>
                     <Form.Item name="email" label="Email" rules={[{ required: true, message: 'Vui lòng nhập email' }]}>
                         <Input />
+                    </Form.Item>
+                    <Form.Item name="matKhau" label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]}>
+                        <Input.Password />
                     </Form.Item>
                     <Form.Item name="soDienThoai" label="SĐT" rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]}>
                         <Input />
