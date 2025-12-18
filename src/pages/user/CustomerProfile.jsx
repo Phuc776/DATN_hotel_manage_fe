@@ -8,7 +8,8 @@ import {
     message,
     Input,
     Form,
-    Divider
+    Divider,
+    Space
 } from "antd";
 
 export default function CustomerProfile() {
@@ -94,42 +95,45 @@ export default function CustomerProfile() {
                                 {cccd ? (
                                     <span className="font-mono">{cccd}</span>
                                 ) : (
-                                    <Button
-                                        size="small"
-                                        loading={loadingCccd}
-                                        onClick={revealCccd}
-                                    >
-                                        Hiện CCCD
-                                    </Button>
+                                    <Space>
+                                        <Button
+                                            size="small"
+                                            loading={loadingCccd}
+                                            onClick={revealCccd}
+                                        >
+                                            Hiện CCCD
+                                        </Button>
+                                        <span className="text-sm text-gray-500">(Bảo mật)</span>
+                                    </Space>
                                 )}
                             </Descriptions.Item>
 
                             <Descriptions.Item label="Ngày xác thực CCCD">
-                                {new Date(profile.ngayXacThucCCCD).toLocaleString()}
+                                {profile.ngayXacThucCCCD ? new Date(profile.ngayXacThucCCCD).toLocaleString() : '—'}
                             </Descriptions.Item>
 
                             <Descriptions.Item label="Ngày tạo tài khoản">
-                                {new Date(profile.taiKhoan.ngayTao).toLocaleString()}
+                                {profile.taiKhoan.ngayTao ? new Date(profile.taiKhoan.ngayTao).toLocaleString() : '—'}
                             </Descriptions.Item>
                         </Descriptions>
 
-
-
                         <Divider />
 
-                        <Button
-                            type="primary"
-                            onClick={() => {
-                                setEditing(true);
-                                form.setFieldsValue({
-                                    hoTen: profile.taiKhoan?.hoTen,
-                                    soDienThoai: profile.taiKhoan?.soDienThoai,
-                                    cccd: "" // reset CCCD
-                                });
-                            }}
-                        >
-                            Chỉnh sửa thông tin
-                        </Button>
+                        <div className="flex gap-2">
+                            <Button
+                                type="primary"
+                                onClick={() => {
+                                    setEditing(true);
+                                    form.setFieldsValue({
+                                        hoTen: profile.taiKhoan?.hoTen,
+                                        soDienThoai: profile.taiKhoan?.soDienThoai,
+                                        cccd: "" // reset CCCD
+                                    });
+                                }}
+                            >
+                                Chỉnh sửa thông tin
+                            </Button>
+                        </div>
                     </>
                 ) : (
                     <Form

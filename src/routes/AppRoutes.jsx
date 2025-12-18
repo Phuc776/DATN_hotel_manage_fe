@@ -50,6 +50,7 @@ import ServiceDetail from "../pages/hotel_owner/ServiceDetail"
 // Staff pages
 import StaffDashboard from "../pages/staff/Dashboard"
 import StaffBookings from "../pages/staff/Bookings"
+import StaffBookingDetail from "../pages/staff/BookingDetail"
 import StaffRooms from "../pages/staff/Rooms"
 import StaffRoomDetail from "../pages/staff/RoomDetail"
 import StaffServices from "../pages/staff/Services"
@@ -157,6 +158,7 @@ export default function AppRoutes() {
       >
         <Route index element={<StaffDashboard />} />
         <Route path="bookings" element={<StaffBookings />} />
+        <Route path="bookings/:id" element={<StaffBookingDetail />} />
         <Route path="rooms" element={<StaffRooms />} />
         <Route path="rooms/:id" element={<StaffRoomDetail />} />
         <Route path="services" element={<StaffServices />} />
