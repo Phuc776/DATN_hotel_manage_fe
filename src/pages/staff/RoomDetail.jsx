@@ -12,14 +12,12 @@ export default function StaffRoomDetail() {
     const statusLabel = {
         TRONG: "Trống",
         DA_DAT: "Đã đặt",
-        
         CO_KHACH: "Có khách",
     
     };
     const statusColor = {
         TRONG: "green",
         DA_DAT: "orange",
-        
         CO_KHACH: "red",
         
     };

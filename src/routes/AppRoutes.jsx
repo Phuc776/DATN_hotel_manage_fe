@@ -51,7 +51,7 @@ import ServiceDetail from "../pages/hotel_owner/ServiceDetail"
 import StaffDashboard from "../pages/staff/Dashboard"
 import StaffBookings from "../pages/staff/Bookings"
 import StaffBookingDetail from "../pages/staff/BookingDetail"
-import StaffRooms from "../pages/staff/Rooms"
+import StaffRooms from "../pages/staff/StaffRooms"
 import StaffRoomDetail from "../pages/staff/RoomDetail"
 import StaffServices from "../pages/staff/Services"
 
