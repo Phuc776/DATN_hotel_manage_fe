@@ -140,11 +140,17 @@ export default function AdminUsers() {
                 footer={null}
             >
                 <Form form={form} layout="vertical" onFinish={submitAddAdmin}>
+                    <Form.Item name="hoTen" label="Họ tên">
+                        <Input />
+                    </Form.Item>
                     <Form.Item name="email" label="Email" rules={[{ required: true, message: 'Vui lòng nhập email' }] }>
                         <Input />
                     </Form.Item>
                     <Form.Item name="matKhau" label="Mật khẩu" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }] }>
                         <Input.Password />
+                    </Form.Item>
+                    <Form.Item name="soDienThoai" label="Số điện thoại">
+                        <Input />
                     </Form.Item>
                     <Form.Item>
                         <Space>

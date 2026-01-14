@@ -127,14 +127,14 @@ export default function BookingDetail() {
 
         {(booking.trangThai === "CHO_XAC_NHAN" ||
           booking.trangThai === "DA_XAC_NHAN") && (
-          <Button
-            danger
-            style={{ marginLeft: 8 }}
-            onClick={yeuCauHuyBooking}
-          >
-            Hủy booking
-          </Button>
-        )}
+            <Button
+              danger
+              style={{ marginLeft: 8 }}
+              onClick={yeuCauHuyBooking}
+            >
+              Hủy booking
+            </Button>
+          )}
       </div>
     </Card>
   );

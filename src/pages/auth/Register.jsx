@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import 'antd/dist/reset.css';
+import { Card, Input, Button, Select, Typography, Alert } from 'antd';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ export default function Register() {
     hoTen: "",
     soDienThoai: "",
     vaiTro: "KHACH_HANG",
+    cccd: "",
   });
 
   const submit = async (e) => {
@@ -28,13 +31,19 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const res = await api.post("/auth/register", {
+      const payload = {
         email: form.email,
         matKhau: form.matKhau,
         vaiTro: form.vaiTro,
         hoTen: form.hoTen,
         soDienThoai: form.soDienThoai || null,
-      });
+      };
+
+      if (form.vaiTro === 'KHACH_HANG') {
+        payload.cccd = form.cccd || null;
+      }
+
+      const res = await api.post("/auth/register", payload);
 
       alert("Đăng ký thành công! Hãy đăng nhập.");
       navigate("/login");
@@ -46,92 +55,101 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold mb-2 text-center text-blue-600">Hotel Management</h1>
-        <p className="text-center text-gray-600 mb-6">Tạo tài khoản mới</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <Card style={{ width: '100%', maxWidth: 480, borderRadius: 12 }}>
+        <div style={{ textAlign: 'center', marginBottom: 16 }}>
+          <Typography.Title level={3} style={{ margin: 0, color: '#1e3a8a' }}>
+            Hotel Management
+          </Typography.Title>
+          <Typography.Text type="secondary">Tạo tài khoản mới</Typography.Text>
+        </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-            {error}
+          <div style={{ marginBottom: 12 }}>
+            <Alert type="error" message={error} showIcon />
           </div>
         )}
 
-        <form onSubmit={submit} className="space-y-4">
-          <div>
+        <form onSubmit={submit}>
+          <div style={{ marginBottom: 12 }}>
             <label className="block text-sm font-medium text-gray-700 mb-1">Họ tên</label>
-            <input
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
+            <Input
               value={form.hoTen}
               onChange={(e) => setForm({ ...form, hoTen: e.target.value })}
               required
+              placeholder="Họ và tên"
             />
           </div>
 
-          <div>
+          <div style={{ marginBottom: 12 }}>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
+            <Input
               type="email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
+              placeholder="email@example.com"
             />
           </div>
 
-          <div>
+          <div style={{ marginBottom: 12 }}>
             <label className="block text-sm font-medium text-gray-700 mb-1">Mật khẩu</label>
-            <input
-              type="password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
+            <Input.Password
               value={form.matKhau}
               onChange={(e) => setForm({ ...form, matKhau: e.target.value })}
               required
+              placeholder="••••••••"
             />
           </div>
 
-          <div>
+          <div style={{ marginBottom: 12 }}>
             <label className="block text-sm font-medium text-gray-700 mb-1">Xác nhận mật khẩu</label>
-            <input
-              type="password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
+            <Input.Password
               value={form.confirm}
               onChange={(e) => setForm({ ...form, confirm: e.target.value })}
               required
+              placeholder="Nhập lại mật khẩu"
             />
           </div>
 
-          <div>
+          <div style={{ marginBottom: 12 }}>
             <label className="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
-            <input
+            <Input
               type="tel"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
               value={form.soDienThoai}
               onChange={(e) => setForm({ ...form, soDienThoai: e.target.value })}
+              placeholder="Số điện thoại"
             />
           </div>
 
-          <div>
+          {form.vaiTro === 'KHACH_HANG' && (
+            <div style={{ marginBottom: 12 }}>
+              <label className="block text-sm font-medium text-gray-700 mb-1">CCCD</label>
+              <Input
+                value={form.cccd}
+                onChange={(e) => setForm({ ...form, cccd: e.target.value })}
+                placeholder="Số CCCD (nếu có)"
+              />
+            </div>
+          )}
+
+          <div style={{ marginBottom: 16 }}>
             <label className="block text-sm font-medium text-gray-700 mb-1">Vai trò</label>
-            <select
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
+            <Select
               value={form.vaiTro}
-              onChange={(e) => setForm({ ...form, vaiTro: e.target.value })}
+              onChange={(value) => setForm({ ...form, vaiTro: value })}
+              style={{ width: '100%' }}
             >
-              <option value="KHACH_HANG">Khách hàng</option>
-              <option value="CHU_KHACH_SAN">Chủ khách sạn</option>
-            </select>
+              <Select.Option value="KHACH_HANG">Khách hàng</Select.Option>
+              <Select.Option value="CHU_KHACH_SAN">Chủ khách sạn</Select.Option>
+            </Select>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 rounded-lg transition"
-          >
-            {loading ? "Đang đăng ký..." : "Đăng ký"}
-          </button>
+          <Button type="primary" htmlType="submit" block loading={loading}>
+            {loading ? 'Đang đăng ký...' : 'Đăng ký'}
+          </Button>
         </form>
-      </div>
+      </Card>
     </div>
   );
 }

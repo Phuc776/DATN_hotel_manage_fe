@@ -29,12 +29,7 @@ export default function AdminLayout() {
             <Link to="/admin/room-posts" className="px-4 py-2 rounded-lg hover:bg-red-50 hover:text-red-600">
               Quản lý bài đăng phòng
             </Link>
-            <Link to="/admin/room-types" className="px-4 py-2 rounded-lg hover:bg-red-50 hover:text-red-600">
-              Quản lý loại phòng
-            </Link>
-            <Link to="/admin/services" className="px-4 py-2 rounded-lg hover:bg-red-50 hover:text-red-600">
-              Quản lý dịch vụ
-            </Link>
+            
 
 
           </nav>

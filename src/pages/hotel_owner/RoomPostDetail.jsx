@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Card, Descriptions, Spin, message, Button, Tag } from "antd";
+import { Card, Descriptions, Spin, message, Button, Tag, Row, Col } from "antd";
+import ImageGallery from "../../components/ImageGallery";
 import api from "../../api/axios";
 
 export default function RoomPostDetail() {
@@ -36,17 +37,25 @@ export default function RoomPostDetail() {
             <Button onClick={() => navigate(-1)} className="mb-4">← Quay lại</Button>
             <h1 className="text-2xl font-bold mb-4">Chi tiết bài đăng</h1>
 
-            <Card>
-                <Descriptions column={1}>
-                    <Descriptions.Item label="Tiêu đề">{post.tieuDe}</Descriptions.Item>
-                    <Descriptions.Item label="Mô tả">{post.moTa}</Descriptions.Item>
-                    <Descriptions.Item label="Số lượng phòng">{post.soLuongPhong}</Descriptions.Item>
-                    <Descriptions.Item label="Trạng thái"><Tag color={statusColor[post.trangThaiBaiDang]}>{statusLabel[post.trangThaiBaiDang]}</Tag></Descriptions.Item>
-                    <Descriptions.Item label="Loại phòng">{post.loaiPhong?.tenLoaiPhong}</Descriptions.Item>
-                    <Descriptions.Item label="Khách sạn">{post.khachSan?.tenKhachSan}</Descriptions.Item>
-                    <Descriptions.Item label="Ngày đăng">{new Date(post.ngayDang).toLocaleString()}</Descriptions.Item>
-                </Descriptions>
-            </Card>
+            <Row gutter={16}>
+                <Col xs={24} lg={14}>
+                    <Card>
+                        <Descriptions column={1}>
+                            <Descriptions.Item label="Tiêu đề">{post.tieuDe}</Descriptions.Item>
+                            <Descriptions.Item label="Mô tả">{post.moTa}</Descriptions.Item>
+                            <Descriptions.Item label="Số lượng phòng">{post.soLuongPhong}</Descriptions.Item>
+                            <Descriptions.Item label="Trạng thái"><Tag color={statusColor[post.trangThaiBaiDang]}>{statusLabel[post.trangThaiBaiDang]}</Tag></Descriptions.Item>
+                            <Descriptions.Item label="Loại phòng">{post.loaiPhong?.tenLoaiPhong}</Descriptions.Item>
+                            <Descriptions.Item label="Khách sạn">{post.khachSan?.tenKhachSan}</Descriptions.Item>
+                            <Descriptions.Item label="Ngày đăng">{new Date(post.ngayDang).toLocaleString()}</Descriptions.Item>
+                        </Descriptions>
+                    </Card>
+                </Col>
+
+                <Col xs={24} lg={10}>
+                    <ImageGallery images={post.hinhAnh || []} />
+                </Col>
+            </Row>
         </div>
     )
 }

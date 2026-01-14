@@ -12,8 +12,9 @@ import UserLayout from "../layouts/UserLayout"
 // pages
 import GuestHotelDetail from "../pages/guest/HotelDetail"
 import GuestRoomPostDetail from "../pages/guest/RoomPostDetail"
-import SearchAvailable from "../pages/user/SearchAvailable"
-import CustomerBookingForm from "../pages/user/CustomerBookingForm"
+import SearchResults from "../pages/user/SearchResults"
+import RoomDetail from "../pages/user/RoomDetail"
+import Booking from "../pages/user/Booking"
 
 import Login from "../pages/auth/Login"
 import Register from "../pages/auth/Register"
@@ -46,6 +47,9 @@ import Roomtypes from "../pages/hotel_owner/Roomtypes"
 import RoomtypeDetail from "../pages/hotel_owner/RoomtypeDetail"
 import Services from "../pages/hotel_owner/Services"
 import ServiceDetail from "../pages/hotel_owner/ServiceDetail"
+import OwnerInvoiceList from "../pages/hotel_owner/InvoiceList"
+import OwnerInvoiceDetail from "../pages/hotel_owner/InvoiceDetail"
+import OwnerRevenueDashboard from "../pages/hotel_owner/OwnerRevenueDashboard"
 
 // Staff pages
 import StaffDashboard from "../pages/staff/Dashboard"
@@ -54,12 +58,21 @@ import StaffBookingDetail from "../pages/staff/BookingDetail"
 import StaffRooms from "../pages/staff/StaffRooms"
 import StaffRoomDetail from "../pages/staff/RoomDetail"
 import StaffServices from "../pages/staff/Services"
+import StaffInvoiceList from "../pages/staff/InvoiceList"
+import StaffInvoiceDetail from "../pages/staff/InvoiceDetail"
 
 // User pages
 import UserDashboard from "../pages/user/Dashboard"
 import MyBookings from "../pages/user/MyBookings"
 import BookingDetail from "../pages/user/BookingDetail"
 import CustomerProfile from "../pages/user/CustomerProfile"
+import CurrentStay from "../pages/user/CurrentStay"
+import StayList from "../pages/user/StayList"
+import StayDetail from "../pages/user/StayDetail"
+import UseService from "../pages/user/UseService"
+import InvoiceHistory from "../pages/user/InvoiceHistory"
+import InvoiceDetail from "../pages/user/InvoiceDetail"
+import CustomerReviews from "../pages/user/CustomerReviews"
 
 function Unauthorized() {
   return (
@@ -86,8 +99,9 @@ export default function AppRoutes() {
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/hotels/:id" element={<GuestHotelDetail />} />
         <Route path="/room-posts/:id" element={<GuestRoomPostDetail />} />
-        <Route path="/search" element={<SearchAvailable />} />
-        <Route path="/search/:baiDangPhongId" element={<CustomerBookingForm />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/phong/:baiDangPhongId" element={<RoomDetail />} />
+        <Route path="/booking/:baiDangPhongId" element={<PrivateRoute roles={["KHACH_HANG"]}><Booking /></PrivateRoute>} />
 
       </Route>
 
@@ -135,6 +149,11 @@ export default function AppRoutes() {
         <Route path="roomtypes/:id" element={<RoomtypeDetail />} />
         <Route path="services" element={<Services />} />
         <Route path="services/:id" element={<ServiceDetail />} />
+        <Route path="invoices" element={<OwnerInvoiceList />} />
+        <Route path="invoices/:id" element={<OwnerInvoiceDetail />} />
+
+        <Route path="reports" element={<OwnerRevenueDashboard />} />
+
         <Route
           path="bookings"
           element={
@@ -162,6 +181,8 @@ export default function AppRoutes() {
         <Route path="rooms" element={<StaffRooms />} />
         <Route path="rooms/:id" element={<StaffRoomDetail />} />
         <Route path="services" element={<StaffServices />} />
+        <Route path="invoices" element={<StaffInvoiceList />} />
+        <Route path="invoices/:id" element={<StaffInvoiceDetail />} />
 
       </Route>
 
@@ -177,6 +198,16 @@ export default function AppRoutes() {
         <Route index element={<UserDashboard />} />
         <Route path="bookings" element={<MyBookings />} />
         <Route path="bookings/:id" element={<BookingDetail />} />
+
+        <Route path="stay-current" element={<CurrentStay />} />
+        <Route path="stay-list" element={<StayList />} />
+        <Route path="stay/:id" element={<StayDetail />} />
+
+        <Route path="use-service" element={<UseService />} />
+
+        <Route path="invoice-history" element={<InvoiceHistory />} />
+        <Route path="invoice/:id" element={<InvoiceDetail />} />
+
         <Route
           path="favorites"
           element={
@@ -185,18 +216,8 @@ export default function AppRoutes() {
             </div>
           }
         />
-        <Route
-          path="profile"
-          element={<CustomerProfile />}
-        />
-        <Route
-          path="reviews"
-          element={
-            <div className="p-6">
-              <h1>Đánh Giá Của Tôi</h1>
-            </div>
-          }
-        />
+        <Route path="profile" element={<CustomerProfile />} />
+        <Route path="reviews" element={<CustomerReviews />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

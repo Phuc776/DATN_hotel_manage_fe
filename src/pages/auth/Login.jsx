@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import api from "../../api/axios"
 import { useAuth } from "../../auth/AuthContext"
+import 'antd/dist/reset.css';
+import { Card, Input, Button, Typography, Alert } from 'antd'
 
 export default function Login() {
   const { login } = useAuth()
@@ -35,49 +37,50 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold mb-2 text-center text-blue-600">Hotel Management</h1>
-        <p className="text-center text-gray-600 mb-6">Đăng nhập vào hệ thống</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+      <Card style={{ width: '100%', maxWidth: 560, borderRadius: 12, padding: 24 }}>
+        <div style={{ textAlign: 'center', marginBottom: 16 }}>
+          <Typography.Title level={2} style={{ margin: 0, color: '#1e3a8a' }}>
+            Hotel Management
+          </Typography.Title>
+          <Typography.Text type="secondary">Đăng nhập vào hệ thống</Typography.Text>
+        </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+          <div style={{ marginBottom: 12 }}>
+            <Alert type="error" message={error} showIcon />
+          </div>
         )}
 
-        <form onSubmit={submit} className="space-y-4">
-          <div>
+        <form onSubmit={submit}>
+          <div style={{ marginBottom: 16 }}>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
+            <Input
               placeholder="email@example.com"
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
+              size="large"
             />
           </div>
 
-          <div>
+          <div style={{ marginBottom: 20 }}>
             <label className="block text-sm font-medium text-gray-700 mb-1">Mật khẩu</label>
-            <input
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
-              type="password"
-              placeholder="••••••••"
+            <Input.Password
               value={form.matKhau}
               onChange={(e) => setForm({ ...form, matKhau: e.target.value })}
               required
+              placeholder="••••••••"
+              size="large"
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 rounded-lg transition"
-          >
-            {loading ? "Đang đăng nhập..." : "Đăng nhập"}
-          </button>
+          <Button type="primary" htmlType="submit" block loading={loading} size="large">
+            {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+          </Button>
         </form>
-      </div>
+      </Card>
     </div>
   )
 }

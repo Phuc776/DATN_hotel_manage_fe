@@ -68,10 +68,10 @@ export default function StaffBookingDetail() {
             onOk: async () => {
                 try {
                     await api.post(`/nhan-vien/booking/${bid}/check-in`);
-                    message.success("Check-in thành công");
+                    message.success("Check-in thành công.");
                     fetchBooking();
-                } catch {
-                    message.error("Check-in thất bại");
+                } catch (ex) {
+                    message.error("Check-in thất bại." + ex);
                 }
             }
         });
@@ -82,8 +82,8 @@ export default function StaffBookingDetail() {
             await api.post(`/nhan-vien/booking/${bid}/check-out`);
             message.success("Check-out thành công");
             fetchBooking();
-        } catch {
-            message.error("Check-out thất bại");
+        } catch (ex) {
+            message.error("Check-out thất bại." + ex);
         }
     };
 
@@ -96,8 +96,8 @@ export default function StaffBookingDetail() {
                     await api.post(`/nhan-vien/booking/${bid}/cancel`);
                     message.success("Đã hủy booking");
                     fetchBooking();
-                } catch {
-                    message.error("Hủy booking thất bại");
+                } catch (ex) {
+                    message.error("Hủy booking thất bại." + ex);
                 }
             }
         });

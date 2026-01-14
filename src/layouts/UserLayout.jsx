@@ -28,11 +28,23 @@ export default function UserLayout() {
             <Link to="/user/bookings" className="px-4 py-2 rounded-lg hover:bg-purple-50">
               Đặt Phòng Của Tôi
             </Link>
-            <Link to="/user/favorites" className="px-4 py-2 rounded-lg hover:bg-purple-50">
+            {/* <Link to="/user/favorites" className="px-4 py-2 rounded-lg hover:bg-purple-50">
               Khách sạn Yêu Thích
-            </Link>
+            </Link> */}
             <Link to="/user/profile" className="px-4 py-2 rounded-lg hover:bg-purple-50">
               Hồ Sơ Cá Nhân
+            </Link>
+            <Link to="/user/stay-current" className="px-4 py-2 rounded-lg hover:bg-purple-50">
+              Phiên Lưu Trú Hiện Tại
+            </Link>
+            <Link to="/user/stay-list" className="px-4 py-2 rounded-lg hover:bg-purple-50">
+              Danh sách phiên Lưu Trú
+            </Link>
+            <Link to="/user/use-service" className="px-4 py-2 rounded-lg hover:bg-purple-50">
+              Sử Dụng Dịch Vụ
+            </Link>
+            <Link to="/user/invoice-history" className="px-4 py-2 rounded-lg hover:bg-purple-50">
+              Lịch Sử Hóa Đơn
             </Link>
             <Link to="/user/reviews" className="px-4 py-2 rounded-lg hover:bg-purple-50">
               Đánh Giá Của Tôi

@@ -1,6 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import { useAuth } from "../auth/AuthContext"
 import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 export default function GuestLayout() {
   const { logout, user } = useAuth()
@@ -18,6 +19,8 @@ export default function GuestLayout() {
       <main className="p-6 bg-gray-200 flex-1 overflow-auto">
         <Outlet />
       </main>
+
+      <Footer />
     </>
   )
 }

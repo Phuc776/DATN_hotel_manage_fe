@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Table, Button, Tag, message } from "antd";
+import { Table, Button, Tag, message, Space } from "antd";
 import api from "../../api/axios";
 
 const trangThaiMap = {
@@ -57,7 +57,7 @@ export default function MyBookings() {
   const columns = [
     {
       title: "Mã booking",
-      render: (_, __, idx) => `BK${idx + 1}`,
+      render: (_, __, idx) => `${idx + 1}`,
       key: "id"
     },
     {
@@ -88,37 +88,17 @@ export default function MyBookings() {
       title: "Hành động",
       key: "action",
       render: (_, record) => (
-        <>
-          <Button
-            size="small"
-            onClick={() => navigate(`/user/bookings/${record.id}`)}
-          >
-            Chi tiết
-          </Button>
+        <Space>
+          <Button size="middle" onClick={() => navigate(`/user/bookings/${record.id}`)}>Chi tiết</Button>
 
-
-          {(record.trangThai === "DANG_O") && (
-            <Button
-              type="primary"
-              size="small"
-              onClick={() => yeuCauTraPhong(record.id)}
-            >
-              Trả phòng
-            </Button>
+          {record.trangThai === "DANG_O" && (
+            <Button type="primary" size="middle" onClick={() => yeuCauTraPhong(record.id)}>Trả phòng</Button>
           )}
 
-          {(record.trangThai === "CHO_XAC_NHAN" ||
-            record.trangThai === "DA_XAC_NHAN") && (
-            <Button
-              danger
-              size="small"
-              style={{ marginLeft: 8 }}
-              onClick={() => yeuCauHuyBooking(record.id)}
-            >
-              Hủy booking
-            </Button>
+          {(record.trangThai === "CHO_XAC_NHAN" || record.trangThai === "DA_XAC_NHAN") && (
+            <Button danger size="middle" onClick={() => yeuCauHuyBooking(record.id)}>Hủy booking</Button>
           )}
-        </>
+        </Space>
       )
     }
   ];

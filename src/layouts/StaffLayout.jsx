@@ -34,8 +34,11 @@ export default function StaffLayout() {
             <Link to="/staff/services" className="px-4 py-2 rounded-lg hover:bg-green-50">
               Dịch Vụ Thêm
             </Link>
-            <Link to="/staff/users" className="px-4 py-2 rounded-lg hover:bg-green-50">
+            {/* <Link to="/staff/users" className="px-4 py-2 rounded-lg hover:bg-green-50">
               Quản Lý Người Dùng
+            </Link> */}
+            <Link to="/staff/invoices" className="px-4 py-2 rounded-lg hover:bg-green-50">
+              Hóa Đơn
             </Link>
             <Link to="/staff/notif" className="px-4 py-2 rounded-lg hover:bg-green-50">
               Thông Báo

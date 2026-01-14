@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 
 const DAYS = 10;            // số ngày hiển thị
 const HOUR_WIDTH = 7;   // px per hour (tùy chỉnh)
-const PAST_DAYS = 1;     // số ngày ở quá khứ
+const PAST_DAYS = 3;   // số ngày ở quá khứ
 const ROOM_COL_WIDTH = 192; // px — fixed room column width (w-48 == 12rem == 192px)
 const DAY_WIDTH = 24 * HOUR_WIDTH;
 
@@ -14,6 +14,13 @@ const bookingColor = {
     CHO_HUY: "bg-purple-600",
     DANG_O: "bg-green-600",
     CHO_TRA: "bg-cyan-400",
+};
+const bookingStatusList = {
+    CHO_XAC_NHAN: "Chờ xác nhận",
+    DA_XAC_NHAN: "Đã xác nhận",
+    CHO_HUY: "Chờ hủy",
+    DANG_O: "Đang ở",
+    CHO_TRA: "Chờ trả phòng",
 };
 
 export default function StaffRoomsTimeline({ rooms }) {
@@ -76,6 +83,19 @@ export default function StaffRoomsTimeline({ rooms }) {
 
     return (
         <div className="border rounded overflow-hidden">
+            {/* Legend explaining booking status colors. Placed outside the horizontal scroller so it doesn't scroll with timeline. */}
+            <div className="px-4 py-2 border-b bg-white">
+                <div className="flex flex-wrap gap-4 items-center">
+                    {/* Derive legend items dynamically from bookingColor so it's easy to extend */}
+                    {Object.entries(bookingColor).map(([status, cls]) => (
+                        <div key={status} className="flex items-center gap-2 text-sm text-gray-700">
+                            <span className={`${cls} inline-block w-3 h-3 rounded-sm`} aria-hidden="true" />
+                            <span className="whitespace-nowrap">{bookingStatusList[status]}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
             <div className="overflow-x-auto" ref={scrollerRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
                 <div className="min-w-max" ref={contentRef}
                     style={{
@@ -154,7 +174,7 @@ export default function StaffRoomsTimeline({ rooms }) {
                                         </div>
 
                                         {/* Timeline của phòng */}
-                                        <div className="relative h-12 flex-1">
+                                        <div className="relative h-12 flex-1 overflow-hidden">
                                             {room.bookings.map((b) => {
                                                 const style = calcBookingStyle(b.ngayNhan, b.ngayTra);
 

@@ -1,13 +1,13 @@
 // src/pages/staff/StaffRoomsCard.jsx
-import { Card, Modal, Tag } from "antd";
+import { Card, Modal } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 const roomStyle = {
-    TRONG: "border-green-400 bg-green-50",
-    DA_DAT: "border-orange-400 bg-orange-50",
-    CO_KHACH: "border-red-400 bg-red-50",
+    TRONG: "border-green-400 bg-green-400",
+    DA_DAT: "border-orange-400 bg-orange-400",
+    CO_KHACH: "border-red-400 bg-red-400",
 };
 
 const roomLabel = {
@@ -26,20 +26,22 @@ export default function StaffRoomsCard({ rooms }) {
             {/* Grid phòng */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {rooms.map((room) => (
-                    <Card
+                    <div
                         key={room.id}
-                        className={`cursor-pointer border ${roomStyle[room.trangThaiPhong]}`}
+                        className={`cursor-pointer p-0 border rounded ${roomStyle[room.trangThaiPhong]}`}
                         onClick={() => {
                             setSelectedRoom(room);
                             setOpen(true);
                         }}
                     >
-                        <h3 className="text-lg font-bold">Phòng {room.soPhong}</h3>
-                        <div className="text-sm text-gray-600">{room.tenLoaiPhong}</div>
-                        <Tag className="mt-2">
-                            {roomLabel[room.trangThaiPhong]}
-                        </Tag>
-                    </Card>
+                        <Card variant="plain" className="h-full bg-transparent" styles={{ body: { background: 'transparent' } }}>
+                            <h3 className="text-lg font-bold">Phòng {room.soPhong}</h3>
+                            <div className="text-sm text-gray-600">{room.tenLoaiPhong}</div>
+                            <div className={`mt-2 inline-block px-2 py-0.5 text-sm font-medium rounded ${roomStyle[room.trangThaiPhong]}`}>
+                                {roomLabel[room.trangThaiPhong]}
+                            </div>
+                        </Card>
+                    </div>
                 ))}
             </div>
 
@@ -70,7 +72,7 @@ export default function StaffRoomsCard({ rooms }) {
                             {" → "}
                             {dayjs(b.ngayTra).format("DD/MM HH:mm")}
                         </div>
-                        <Tag className="mt-1">{b.trangThai}</Tag>
+                        <div className="mt-1 inline-block px-2 py-0.5 text-sm font-medium rounded bg-gray-100">{b.trangThai}</div>
                     </div>
                 ))}
             </Modal>

@@ -35,11 +35,14 @@ export default function OwnerLayout() {
             <Link to="/owner/bookings" className="px-4 py-2 rounded-lg hover:bg-blue-50">
               Đơn Đặt Phòng
             </Link>
+            <Link to="/owner/invoices" className="px-4 py-2 rounded-lg hover:bg-blue-50">
+              Hóa Đơn
+            </Link>
             <Link to="/owner/notif" className="px-4 py-2 rounded-lg hover:bg-blue-50">
               Thông Báo
             </Link>
             <Link to="/owner/reports" className="px-4 py-2 rounded-lg hover:bg-blue-50">
-              Báo Cáo
+              Thống kê & Báo cáo
             </Link>
           </nav>
         </aside>
